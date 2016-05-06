@@ -1,0 +1,130 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15-mar-2016, 9.39.40
+    Author     : FSEVERI\loreggian3064
+*/
+
+html,body{
+		height:100%;
+		margin: 0;
+		padding: 0;
+		font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+		background: white;
+		color: white;
+	}
+	#menu{
+		width: 100%;
+		height: 90px;
+		min-width: 814px;
+		background: black;
+		position: fixed;
+		top: 0;
+		left: 0;
+		text-transform: uppercase;
+		font-size: 0.8em;
+		z-index: 2; 
+	}
+	.menu-title a, .menu-option a{
+		text-decoration: none;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+	}
+	.menu-title a{
+		font-size: 1.5em;
+		color: green;
+	}
+	.menu-title a:hover{
+		color: white;
+	}
+	.menu-option a{
+		color: white;
+		font-size: 0.8em;
+	}
+	.menu-option a:hover{
+		color: green;
+	}
+	#main{
+		width: 100%;
+		min-width: 814px;
+		position: absolute;
+		top: 90px;
+		left: 0;
+	}
+	.dark{
+		background: #171717;
+		width: 100%;
+		padding-bottom: 8%;
+	}
+	.light{
+		background: white;
+		color: black;
+	}
+	.light a{
+		text-decoration: none;
+		color: green;	
+		-webkit-transition: all .3s;
+   	-moz-transition: all .3s;
+      transition: all .3s;
+	}
+	.light a:hover{
+	color: lightgreen;	
+	}
+	.name{
+		font-size: 4.3em;
+		text-transform: uppercase;
+		margin-top: 55%;
+	}
+	hr.main{
+		margin: 25px auto 30px;
+		padding: 0;
+		max-width: 250px;
+		border: 0;
+		border-top: solid 5px;
+		text-align: center;
+	}
+	hr.main:after{
+		content: "\f1de";
+		display: inline-block;
+		position: relative;
+		top: -0.8em;
+		padding: 0 .25em;
+		font-family: FontAwesome;
+		font-size: 2em;
+		color: #fff;
+		background-color: #171717;
+	}
+	hr{
+		margin: 25px auto 30px;
+		padding: 0;
+		max-width: 250px;
+		border: 0;
+		border-top: solid 5px;
+		text-align: center;
+	}
+	hr:after {
+		display: inline-block;
+		position: relative;
+		top: -0.8em;
+		padding: 0 .25em;
+		color: #171717;
+		background-color: #171717;
+	}
+	.button{
+		border: 2px solid #171717;
+		background: white;
+		padding: 5px;
+		font-size: 1em;
+		cursor: pointer;
+		-webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      transition: all .3s;
+	}
+	.button:hover{
+		background: #171717;
+		color: white;
+	}
