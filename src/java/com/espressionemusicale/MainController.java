@@ -29,8 +29,8 @@ public class MainController {
     @RequestMapping(value="/")
     public String index(ModelMap map){
         map.put("titolo", "Espressione Musicale");
-        //List<Evento> eventi = db.getEventi();
-        //map.put("eventi", eventi);
+        List<Evento> eventi = dbman.getEventi();
+        map.put("eventi", eventi);
         return "paginaPrincipale";
     }
     

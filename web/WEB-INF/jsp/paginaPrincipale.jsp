@@ -46,18 +46,12 @@
 		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
 			<tr align="center">
 			<td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
-			<td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
-			<td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
 			</tr>
 			<tr align="center" >
-			<td><a href="">TITOLO 1</a></td>
-			<td><a href="">TITOLO 2</a></td>
-			<td><a href="">TITOLO 3</a></td>
+			<td><a href="#"></a></td>
 			</tr>
 			<tr align="center" >
 			<td><i>Descrizione 1</i></td>
-			<td><i>Descrizione 2</i></td>
-			<td><i>Descrizione 3</i></td>
 			</tr>
 		</table>
 		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
