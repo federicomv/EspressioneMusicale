@@ -4,6 +4,7 @@
     Author     : FSEVERI\loreggian3064
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,15 +45,17 @@
 	<div id="news" align="center" class="light">
 		<h1 style="text-transform: uppercase;"><b>Eventi pi&ugrave; recenti</b></h1><hr />
 		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
+                    <c:forEach items="eventi" var="evento">
 			<tr align="center">
-			<td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
+                            <td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
 			</tr>
 			<tr align="center" >
-			<td><a href="#"></a></td>
+                            <td><a href="#">${evento.getTitolo()}</a></td>
 			</tr>
 			<tr align="center" >
-			<td><i>Descrizione 1</i></td>
+                            <td><i>${evento.getDescrizione()}</i></td>
 			</tr>
+                    </c:forEach>
 		</table>
 		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
 			<tr align="center">

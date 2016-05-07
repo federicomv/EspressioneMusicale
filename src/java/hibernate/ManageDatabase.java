@@ -14,11 +14,11 @@ import org.hibernate.*;
  */
 public class ManageDatabase {
     //eventi
-    public List<Evento> getEvento(String id){
+    public Evento getEvento(String id){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
         //query
-        List q = sessione.createQuery("SELECT * FROM Eventi WHERE Id=" + id).list();
+        Evento q = (Evento) sessione.createQuery("SELECT * FROM Eventi WHERE Id=" + id).list().get(0);
         sessione.getTransaction().commit();
         return q;
     }
