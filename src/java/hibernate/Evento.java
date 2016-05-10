@@ -5,112 +5,181 @@
  */
 package hibernate;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author FSEVERI\loreggian3064
  */
 @Entity
-@Table(name="Evento")
-public class Evento {
+@Table(name = "Evento")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e"),
+    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM Evento e WHERE e.id = :id"),
+    @NamedQuery(name = "Evento.findByData", query = "SELECT e FROM Evento e WHERE e.data = :data"),
+    @NamedQuery(name = "Evento.findByLuogo", query = "SELECT e FROM Evento e WHERE e.luogo = :luogo"),
+    @NamedQuery(name = "Evento.findByTitolo", query = "SELECT e FROM Evento e WHERE e.titolo = :titolo")})
+public class Evento implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="Id")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 4)
+    @Column(name = "Id")
     private String id;
-    
-    @Column(name="Data")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Data")
+    @Temporal(TemporalType.DATE)
     private Date data;
-    
-    @Column(name="Luogo")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "Luogo")
     private String luogo;
-    
-    @Column(name="Titolo")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "Titolo")
     private String titolo;
-    
-    @Column(name="Categoria")
-    private String categoria;
-    
-    @Column(name="Utente")
-    private String eutente;
-    
-    //referenziazione chiave esterna evento-commento
-    @OneToMany(mappedBy="idevento")
-    private Set<Commento> comm;
-    
-    //referenziazione chiave esterna evento-utente
+    @JoinTable(name = "Evento_Artista", joinColumns = {
+        @JoinColumn(name = "IdEvento", referencedColumnName = "Id")}, inverseJoinColumns = {
+        @JoinColumn(name = "IdArtista", referencedColumnName = "Id")})
+    @ManyToMany
+    private Collection<Artista> artistaCollection;
+    @OneToMany(mappedBy = "idEvento")
+    private Collection<Commento> commentoCollection;
+    @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     @ManyToOne
-    @JoinColumn(name="Utente")
-    private Utente ut;
-    
-    //referenziazione many to many evento-artista
-    @ManyToMany 
-    @JoinTable(
-        name = "evento_artista",
-        joinColumns = {@JoinColumn(name="IdEvento")},
-        inverseJoinColumns={@JoinColumn(name="IdArtista")}
-    )
-    private Set<Categoria> art;
-    
-    public Evento(){}
-    
-    public Evento(String id, Date data, String luogo, String titolo, String categoria, String eutente){
-        this.id = id; 
+    private Categoria categoria;
+    @JoinColumn(name = "Utente", referencedColumnName = "Nickname")
+    @ManyToOne
+    private Utente utente;
+
+    public Evento() {
+    }
+
+    public Evento(String id) {
+        this.id = id;
+    }
+
+    public Evento(String id, Date data, String luogo, String titolo) {
+        this.id = id;
         this.data = data;
         this.luogo = luogo;
         this.titolo = titolo;
-        this.categoria=categoria;
-        this.eutente = eutente;
     }
 
     public String getId() {
         return id;
     }
 
-    public Date getData() {
-        return data;
-    }
-
-    public String getLuogo() {
-        return luogo;
-    }
-
-    public String getTitolo() {
-        return titolo;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public String getUtente() {
-        return eutente;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getData() {
+        return data;
     }
 
     public void setData(Date data) {
         this.data = data;
     }
 
+    public String getLuogo() {
+        return luogo;
+    }
+
     public void setLuogo(String luogo) {
         this.luogo = luogo;
+    }
+
+    public String getTitolo() {
+        return titolo;
     }
 
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
-    public void setCategoria(String categoria) {
+    @XmlTransient
+    public Collection<Artista> getArtistaCollection() {
+        return artistaCollection;
+    }
+
+    public void setArtistaCollection(Collection<Artista> artistaCollection) {
+        this.artistaCollection = artistaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Commento> getCommentoCollection() {
+        return commentoCollection;
+    }
+
+    public void setCommentoCollection(Collection<Commento> commentoCollection) {
+        this.commentoCollection = commentoCollection;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public void setUtente(String eutente) {
-        this.eutente = eutente;
+    public Utente getUtente() {
+        return utente;
     }
-    
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Evento)) {
+            return false;
+        }
+        Evento other = (Evento) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "hibernate.Evento[ id=" + id + " ]";
+    }
     
 }

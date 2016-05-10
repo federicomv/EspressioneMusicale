@@ -5,119 +5,164 @@
  */
 package hibernate;
 
-import java.util.Set;
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author FSEVERI\loreggian3064
  */
 @Entity
-@Table(name="Utente")
-public class Utente {
+@Table(name = "Utente")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u"),
+    @NamedQuery(name = "Utente.findByNickname", query = "SELECT u FROM Utente u WHERE u.nickname = :nickname"),
+    @NamedQuery(name = "Utente.findByNome", query = "SELECT u FROM Utente u WHERE u.nome = :nome"),
+    @NamedQuery(name = "Utente.findByCognome", query = "SELECT u FROM Utente u WHERE u.cognome = :cognome"),
+    @NamedQuery(name = "Utente.findByEmail", query = "SELECT u FROM Utente u WHERE u.email = :email")})
+public class Utente implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="Nickname")
-    private String nick;
-    
-    @Column(name="Nome")
-    private String nom;
-    
-    @Column(name="Cognome")
-    private String cog;
-    
-    @Column(name="Email")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "Nickname")
+    private String nickname;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "Nome")
+    private String nome;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "Cognome")
+    private String cognome;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 20)
+    @Column(name = "Email")
     private String email;
-    
-    //referenziazione chiave esterna utente-evento
-    @OneToMany(mappedBy = "eutente")
-    private Set<Evento> eve;
-    
-    //referenziazione chiave esterna utente-commento
-    @OneToMany(mappedBy = "cutente")
-    private Set<Commento> com;
-    
-    //referenziazione many to many utente-categoria
-    @ManyToMany 
-    @JoinTable(
-        name = "utente_categoria",
-        joinColumns = {@JoinColumn(name="Nickname")},
-        inverseJoinColumns={@JoinColumn(name="Id")}
-    )
-    private Set<Categoria> cat;
-    
-    public Utente(){}
-    
-    public Utente(String nick, String nom, String cog, String email){
-        this.nick = nick;
-        this.nom = nom;
-        this.cog = cog;
-        this.email = email;
-    }
-    
-    public Utente(String nick, String nom, String cog, String email, Set<Evento>eve, Set<Commento> com, Set<Categoria> cat){
-        this.nick = nick;
-        this.nom = nom;
-        this.cog = cog;
-        this.email = email;
-        this.eve = eve;
-        this.com = com;
-        this.cat = cat;
-    }
-    
-    public String getNick() {
-        return nick;
+    @JoinTable(name = "Utente_Categoria", joinColumns = {
+        @JoinColumn(name = "Nickname", referencedColumnName = "Nickname")}, inverseJoinColumns = {
+        @JoinColumn(name = "Id", referencedColumnName = "Id")})
+    @ManyToMany
+    private Collection<Categoria> categoriaCollection;
+    @OneToMany(mappedBy = "utente")
+    private Collection<Commento> commentoCollection;
+    @OneToMany(mappedBy = "utente")
+    private Collection<Evento> eventoCollection;
+
+    public Utente() {
     }
 
-    public String getNom() {
-        return nom;
+    public Utente(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getCog() {
-        return cog;
+    public Utente(String nickname, String nome, String cognome) {
+        this.nickname = nickname;
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Set<Evento> getEve() {
-        return eve;
-    }
-
-    public Set<Commento> getCom() {
-        return com;
-    }
-
-    public Set<Categoria> getCat() {
-        return cat;
-    }
-
-    public void setCat(Set<Categoria> cat) {
-        this.cat = cat;
-    }
-
-    public void setEve(Set<Evento> eve) {
-        this.eve = eve;
-    }
-
-    public void setCom(Set<Commento> com) {
-        this.com = com;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setCog(String cog) {
-        this.cog = cog;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @XmlTransient
+    public Collection<Categoria> getCategoriaCollection() {
+        return categoriaCollection;
+    }
+
+    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+        this.categoriaCollection = categoriaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Commento> getCommentoCollection() {
+        return commentoCollection;
+    }
+
+    public void setCommentoCollection(Collection<Commento> commentoCollection) {
+        this.commentoCollection = commentoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Evento> getEventoCollection() {
+        return eventoCollection;
+    }
+
+    public void setEventoCollection(Collection<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nickname != null ? nickname.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Utente)) {
+            return false;
+        }
+        Utente other = (Utente) object;
+        if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "hibernate.Utente[ nickname=" + nickname + " ]";
+    }
     
-}//Utente
+}

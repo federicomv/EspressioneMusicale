@@ -13,6 +13,8 @@ import org.hibernate.*;
  * @author FSEVERI\loreggian3064
  */
 public class ManageDatabase {
+    
+        Session sessione = HibernateUtil.getSessionFactory().openSession();
     //eventi
     public Evento getEvento(String id){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -23,11 +25,8 @@ public class ManageDatabase {
         return q;
     }
     public List<Evento> getEventi(){
-        Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = sessione.beginTransaction();
         //query
-        List q = sessione.createQuery("SELECT * FROM Eventi").list();
-        sessione.getTransaction().commit();
+        List q = sessione.createQuery("SELECT * FROM Evento").list();
         return q;
     }
     public void salvaEvento(Evento e){
