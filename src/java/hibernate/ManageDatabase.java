@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.*;
 
@@ -12,74 +8,87 @@ import org.hibernate.*;
  *
  * @author FSEVERI\loreggian3064
  */
-public class ManageDatabase {
+public class ManageDatabase{
     
         Session sessione = HibernateUtil.getSessionFactory().openSession();
     //eventi
     public Evento getEvento(String id){
-        Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = sessione.beginTransaction();
         //query
-        Evento q = (Evento) sessione.createQuery("SELECT * FROM Eventi WHERE Id=" + id).list().get(0);
-        sessione.getTransaction().commit();
+        
+        Transaction tx = sessione.beginTransaction();   
+        tx.begin();
+        Evento q = (Evento) sessione.createQuery("FROM Evento WHERE Id=" + id).list().get(0);
+          tx.commit();
         return q;
     }
-    public List<Evento> getEventi(){
+    
+    public ArrayList<Evento> getEventi(){ 
+        Transaction tx = sessione.beginTransaction();
+    
         //query
-        List q = sessione.createQuery("SELECT * FROM Evento").list();
+        ArrayList<Evento> q = (ArrayList)sessione.createQuery("FROM Evento").list();
+        tx.commit();
         return q;
     }
     public void salvaEvento(Evento e){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+        
+        sessione.getTransaction().begin();
         //query
         sessione.save(e);
         sessione.getTransaction().commit();
     }
     //artisti
-    public List<Evento> getArtista(String id){
+    public List<Artista> getArtista(String id){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("SELECT * FROM Artisti WHERE Id=" + id).list();
+        List q = sessione.createQuery("FROM Artisti WHERE Id=" + id).list();
         sessione.getTransaction().commit();
         return q;
     }
-    public List<Evento> getArtisti(){
+    public List<Artista> getArtisti(){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("SELECT * FROM Artisti").list();
+        List q = sessione.createQuery("FROM Artisti").list();
         sessione.getTransaction().commit();
         return q;
     }
     public void salvaArtisti(Artista a){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
         sessione.save(a);
         sessione.getTransaction().commit();
     }
     //commenti
-    public List<Evento> getCommento(String id){
+    public List<Commento> getCommento(String id){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("SELECT * FROM Commenti WHERE Id=" + id).list();
+        List q = sessione.createQuery("FROM Commenti WHERE Id=" + id).list();
         sessione.getTransaction().commit();
         return q;
     }
-    public List<Evento> getCommenti(){
+    public List<Commento> getCommenti(){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("SELECT * FROM Commenti").list();
+        List q = sessione.createQuery("FROM Commenti").list();
         sessione.getTransaction().commit();
         return q;
     }
     public void salvaCommento(Commento c){
         Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sessione.beginTransaction();
+          sessione.getTransaction().begin();
         //query
         sessione.save(c);
         sessione.getTransaction().commit();

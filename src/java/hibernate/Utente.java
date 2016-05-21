@@ -17,9 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,23 +37,17 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Utente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    @Basic(optional = false) 
     @Column(name = "Nickname")
     private String nickname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Basic(optional = false) 
     @Column(name = "Nome")
     private String nome;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Basic(optional = false) 
     @Column(name = "Cognome")
     private String cognome;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 20)
+ 
     @Column(name = "Email")
     private String email;
     @JoinTable(name = "Utente_Categoria", joinColumns = {

@@ -14,9 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,18 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 4)
+    @Basic(optional = false) 
     @Column(name = "Id")
     private String id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 40)
+    @Basic(optional = false) 
     @Column(name = "Testo")
     private String testo;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = false) 
     @Column(name = "Voto")
     private long voto;
     @JoinColumn(name = "Utente", referencedColumnName = "Nickname")

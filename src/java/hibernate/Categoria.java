@@ -15,9 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Table; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,14 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 4)
+    @Basic(optional = false) 
     @Column(name = "Id")
     private String id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Basic(optional = false) 
     @Column(name = "Nome")
     private String nome;
     @ManyToMany(mappedBy = "categoriaCollection")

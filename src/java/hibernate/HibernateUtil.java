@@ -33,7 +33,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Utente.class)
                     .configure();
             ServiceRegistry serviceRegistry
-                = new StandardServiceRegistryBuilder()
+                = new StandardServiceRegistryBuilder() 
                     .applySettings(configuration.getProperties()).build();
              
             // builds a session factory from the service registry

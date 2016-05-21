@@ -21,9 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.TemporalType; 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,23 +42,16 @@ public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 4)
     @Column(name = "Id")
     private String id;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "Data")
     @Temporal(TemporalType.DATE)
     private Date data;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Luogo")
     private String luogo;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Titolo")
     private String titolo;
     @JoinTable(name = "Evento_Artista", joinColumns = {
