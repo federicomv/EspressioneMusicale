@@ -44,19 +44,16 @@
 	</div>
 	<div id="news" align="center" class="light">
 		<h1 style="text-transform: uppercase;"><b>Eventi pi&ugrave; recenti</b></h1><hr />
-		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
+		<div style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
                     <c:forEach items="${eventi}" var="evento">
-			<tr align="center">
-                            <td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
-			</tr>
-			<tr align="center" >
-                            <td><a href="#">${evento.getTitolo()}</a></td>
-			</tr>
-			<tr align="center" >
-                            <td><i>${evento.getLuogo()}</i></td>
-			</tr>
+                        <div float="left">
+                            <img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /><br>
+                            <a href="#">${evento.getTitolo()}</a><br>
+                            <i>${evento.getData()}</i><br>
+                            <i>${evento.getLuogo()}</i>
+			</div>
                     </c:forEach>
-		</table>
+		</div>
 		<table style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
 			<tr align="center">
 			<td><img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /></td>
