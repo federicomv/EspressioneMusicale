@@ -27,7 +27,7 @@
                     <c:forEach items="${eventi}" var="evento">
                         <div class="col-md-4">
                             <img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /><br />
-                            <a href="#">${evento.getTitolo()}</a><br />
+                            <a href="./evento?id=${evento.getId()}">${evento.getTitolo()}</a><br />
                             <i>${evento.getData()}</i><br />
                             <i>${evento.getLuogo()}</i>
                         </div>
