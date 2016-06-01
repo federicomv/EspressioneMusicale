@@ -27,12 +27,17 @@ public class EventiController {
     }
     
     @RequestMapping(value = "/eventi")
-    public String eventi(ModelMap m){
+    public String eventi(ModelMap map){
+        map.put("titolo", "Espressione Musicale");
+        List<Evento> eventi = dbman.getEventi();
+        map.put("eventi", eventi);
         return "eventi";
     }
     
     @RequestMapping(value = "/evento", method = RequestMethod.GET)
-    public String dettaglievento(ModelMap m, @RequestParam(value = "id", required = true) Integer id){
+    public String dettaglievento(ModelMap m, @RequestParam(value = "id", required = true) String id){
+        Evento e = dbman.getEvento(id);
+        m.put("evento", e);
         return "dettaglievento";
     }
 }

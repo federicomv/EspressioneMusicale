@@ -6,7 +6,7 @@
 		<table>
                     <tr>
                         <td width="33%" align="center" class="menu-option"><a href="./eventi"><b>Eventi</b></a></td>
-                        <td width="33%" align="center" class="menu-option"><a href="login.html"><b>Login</b></a></td>
+                        <td width="33%" align="center" class="menu-option"><a href="./login"><b>Login</b></a></td>
                         <td width="33%" align="center" class="menu-option"><a href="registrati.html"><b>Registrati</b></a></td>
                     </tr>
 		</table>

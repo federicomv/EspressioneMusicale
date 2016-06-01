@@ -14,11 +14,7 @@ public class ManageDatabase{
     //eventi
     public Evento getEvento(String id){
         //query
-        
-        Transaction tx = sessione.beginTransaction();   
-        tx.begin();
         Evento q = (Evento) sessione.createQuery("FROM Evento WHERE Id=" + id).list().get(0);
-          tx.commit();
         return q;
     }
     
