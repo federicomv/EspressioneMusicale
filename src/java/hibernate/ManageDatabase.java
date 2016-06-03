@@ -41,7 +41,7 @@ public class ManageDatabase{
         Transaction tx = sessione.beginTransaction();
           sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("FROM Artisti WHERE Id=" + id).list();
+        List q = sessione.createQuery("FROM Artista WHERE Id=" + id).list();
         sessione.getTransaction().commit();
         return q;
     }
@@ -50,7 +50,7 @@ public class ManageDatabase{
         Transaction tx = sessione.beginTransaction();
           sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("FROM Artisti").list();
+        List q = sessione.createQuery("FROM Artista").list();
         sessione.getTransaction().commit();
         return q;
     }
@@ -64,21 +64,13 @@ public class ManageDatabase{
     }
     //commenti
     public List<Commento> getCommento(String id){
-        Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = sessione.beginTransaction();
-          sessione.getTransaction().begin();
         //query
-        List q = sessione.createQuery("FROM Commenti WHERE Id=" + id).list();
-        sessione.getTransaction().commit();
+        List q = sessione.createQuery("FROM Commento WHERE Id=" + id).list();
         return q;
     }
-    public List<Commento> getCommenti(){
-        Session sessione = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = sessione.beginTransaction();
-          sessione.getTransaction().begin();
+    public List<Commento> getCommenti(String id){
         //query
-        List q = sessione.createQuery("FROM Commenti").list();
-        sessione.getTransaction().commit();
+        List q = sessione.createQuery("FROM Commento WHERE IdEvento=" + id).list();
         return q;
     }
     public void salvaCommento(Commento c){
