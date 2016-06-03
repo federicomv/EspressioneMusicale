@@ -11,7 +11,7 @@
     <jsp:include page="head.jsp"/>
 <body>
     <jsp:include page="menu.jsp"/>
-    <div style="width: 95%; height: 100%; margin-top: 3%; margin-bottom: 3%;" class="light">
+    <div style="width: 95%; height: 100%; margin-top: 8%; margin-bottom: 8%;margin-left: 3%" class="light">
         <div class="row">
             <img src="https://upload.wikimedia.org/wikipedia/it/0/07/Stemma_US_Sassuolo_2009-2010.png" width="35%" /> 
         </div>
